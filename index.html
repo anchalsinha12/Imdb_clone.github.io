@@ -1,0 +1,55 @@
+<!--This Code Written By Anchal Sinha-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags for character encoding and viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Title of the page -->
+  <title>IMDb Clone</title>
+  
+  <!-- Link to the external stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Link to the favorites page -->
+  <a href="favorites.html" style="position: absolute; top: 32%; right: 20px; transform: translateY(-50%);">
+    <button>Favorites</button>
+  </a>
+  
+  <!-- Image of the IMDb banner -->
+  <img src="imdb banner.jpg" alt="IMDb Logo" style="width: 1470px; height: 200px; display: block; margin: 50 auto;">
+</head>
+<body>
+  
+  <main>
+    <!-- Form for searching movies -->
+    <form id="search-form">
+      <!-- Input field for entering movie title -->
+      <input type="text" id="movie-title" placeholder="Enter movie title" autocomplete="off">
+      
+      <!-- Dropdown list for search suggestions -->
+      <div class="dropdown-content hide-dropdown" id="search-list"></div>
+      
+      <!-- Submit button for the form -->
+      <button type="submit">Search</button>
+    </form>
+
+   <!-- index.html -->
+   <!-- Form for handling form submission -->
+   <form id="search-form" onsubmit="handleFormSubmit(event);">
+     <!-- ... -->
+   </form>
+
+    <!-- Div for displaying search suggestions -->
+    <div id="suggestions"></div>
+    
+    <!-- Div for displaying movie information -->
+    <div id="movie-info"></div>
+  </main>
+
+   <!-- Link to the external script file -->
+   <script src="script.js"></script>
+</body>
+</html>

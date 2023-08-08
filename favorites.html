@@ -1,0 +1,74 @@
+<!--This Code Written By Anchal Sinha-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favorites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <img src="imdb2.jpg" alt="IMDb Logo" style="width: 100px; height: 100px; display: block; margin: 50 auto;">
+
+  <main>
+    <div id="favorites-container"></div>
+  </main>
+
+   <script>
+ // Function to display favorites on the favorites.html page
+
+function displayFavorites() {
+  const favoritesContainer = document.getElementById('favorites-container');
+
+  // Retrieve favorites from local storage
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+  if (favorites.length === 0) {
+    // If there are no favorites, display a message
+    favoritesContainer.innerHTML = '<p>No favorites added yet.</p>';
+  } else {
+    // If there are favorites, create HTML elements to display them
+    favoritesContainer.innerHTML = '';
+    favorites.forEach((movie) => {
+  const movieInfoHTML = `
+    <div class="movie-item">
+      <h2>${movie.title} (${movie.year})</h2>
+      <img src="${movie.poster}" alt="${movie.title} Poster" class="favorite-movie-image" />
+      <p>${movie.plot}</p>
+      <button onclick="deleteFromFavorites('${movie.imdbID}')">Delete</button>
+    </div>
+  `;
+  favoritesContainer.innerHTML += movieInfoHTML;
+});
+  }
+}
+
+// Call the displayFavorites function when the favorites.html page loads
+document.addEventListener('DOMContentLoaded', displayFavorites);
+
+  </script>
+  
+   <script>
+  // Function to display favorites on the favorites.html page
+  
+  // Add event listeners to delete buttons
+  function attachDeleteButtonListeners() {
+    const deleteButtons = document.querySelectorAll('button[onclick^="deleteFromFavorites"]');
+    deleteButtons.forEach((button, index) => {
+      button.addEventListener('click', () => deleteFromFavorites(index));
+    });
+  }
+
+  // Call the attachDeleteButtonListeners function when the favorites.html page loads
+  document.addEventListener('DOMContentLoaded', attachDeleteButtonListeners);
+</script>
+
+<script src="script.js"></script>
+  
+
+</body>
+
+
+</html>

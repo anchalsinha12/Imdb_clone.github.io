@@ -1,0 +1,86 @@
+<!--This Code Written By Anchal Sinha-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+
+  <main id="movie-info">
+    <!-- Movie information will be displayed here -->
+  </main>
+
+  <img src="imdb2.jpg" alt="IMDb Logo" style="width: 100px; height: 100px; position: fixed; top: 10px; left: 10px;">
+  
+<!-- movie.html -->
+<script>
+  // Replace 'YOUR_API_KEY' with your actual OMDB API key
+  const apiKey = '928920aa';
+  const apiUrl = 'https://www.omdbapi.com/';
+
+  // Function to fetch movie data from the OMDB API
+  function getMovieDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieTitle = urlParams.get('title');
+
+    const url = `${apiUrl}?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => displayMovieInfo(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }
+
+  // Function to display movie information
+  function displayMovieInfo(data) {
+  const movieContainer = document.getElementById('movie-info');
+
+  // Clear previous movie data
+  movieContainer.innerHTML = '';
+
+  if (data.Response === 'True') {
+    // If the movie data is found, display it
+    const title = data.Title;
+    const year = data.Year;
+    const poster = data.Poster;
+    const plot = data.Plot;
+    const director = data.Director;
+    const writer = data.Writer;
+    const releaseDate = data.Released;
+    const rating = data.imdbRating;
+
+    const movieInfoHTML = `
+      <h2>${title} (${year})</h2>
+      <img src="${poster}" alt="${title} Poster" style="max-width: 150px; height: auto;" />
+      <p><strong>Plot:</strong> ${plot}</p>
+      <p><strong>Director:</strong> ${director}</p>
+      <p><strong>Writer:</strong> ${writer}</p>
+      <p><strong>Release Date:</strong> ${releaseDate}</p>
+      <p><strong>Rating:</strong> ${rating}</p>
+      
+    `;
+
+    movieContainer.innerHTML = movieInfoHTML;
+  } else {
+    // If the movie data is not found, display an error message
+    const errorMessage = `
+      <p>Movie not found.</p>
+    `;
+
+    movieContainer.innerHTML = errorMessage;
+  }
+}
+
+  // Call the getMovieDetails function when the movie.html page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    getMovieDetails();
+  });
+</script>
+
+</body>
+</html>
