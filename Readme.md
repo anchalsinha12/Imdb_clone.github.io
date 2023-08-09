@@ -1,3 +1,5 @@
+Live Hosted Link: https://anchalsinha12.github.io/Imdb_clone.github.io/
+
 Here's a `README.md` file that provides an overview of my project:
 
 # IMDb Clone Project
